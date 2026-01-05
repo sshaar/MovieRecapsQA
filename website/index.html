@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark - Shaar et. al.">
+  <meta name="description" content="MovieRecapsQA provides long-form movie recaps with multimodal QA benchmarks and models that answer detailed questions about narrative, characters, and events.">
+  <meta name="keywords" content="video question answering, multimodal video question answering, long-form video understanding, question answering, computer vision">
+  <meta name="author" content="Shaden Shaar, Bradon Thymes, Bradon Thymes, Claire Cardie, Bharath Hariharan">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Cornell University">
+  <meta property="og:title" content="MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark">
+  <meta property="og:description" content="MovieRecapsQA provides long-form movie recaps with multimodal QA benchmarks and models that answer detailed questions about narrative, characters, and events.">
+  <meta property="og:url" content="https://sshaar.github.io/MovieRecapsQA/">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://sshaar.github.io/MovieRecapsQA/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MovieRecapsQA: A Long-Form Multimodal Video Question-Answering - Research Preview">
+  <meta property="article:published_time" content="2026-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Shaden Shaar">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="video question answering">
+  <meta property="article:tag" content="multimodal video question answering benchmark">
+
+  <!-- Twitter -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <!-- <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE"> -->
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <!-- <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE"> -->
+
+  <meta name="twitter:title" content="MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark">
+  <meta name="twitter:description" content="MovieRecapsQA provides long-form movie recaps with multimodal QA benchmarks and models that answer detailed questions about narrative, characters, and events.">
+  <meta name="twitter:image" content="https://sshaar.github.io/MovieRecapsQA/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark">
+  <meta name="citation_author" content="Shaar, Shaden">
+  <meta name="citation_author" content="Thymes, Bradon">
+  <meta name="citation_author" content="Chaixanien, Sirawut">
+  <meta name="citation_author" content="Cardie, Claire">
+  <meta name="citation_author" content="Hariharan, Bharath">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="Under Review">
+  <!-- TODO: Add arxive link -->
+  <meta name="citation_pdf_url" content="ARXIVLINK_HERE">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark - Shaar et. al.</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.svg">
+  <!-- <link rel="apple-touch-icon" href="https://www.cs.cornell.edu/themes/custom/computer_science/logo.svg"> -->
+  
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/dataset-explorer.css">
+
+  <script src="static/data/mrqVideos.js"></script>
+  <script src="static/js/dataset-explorer.js" defer></script>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark",
+    "description": "We evaluate the performance of seven state-of-the-art MLLMs using our benchmark and observe that: 1) visual-only questions remain the most challenging; 2) models default to textual inputs whenever available; 3) extracting factually accurate information from video content is still difficult for all models; and 4) proprietary and open-source models perform comparably on video-dependent questions.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Shaden Shaar",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Cornell University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Bradon Thymes",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Cornell University"
+        }
+      }, 
+      {
+        "@type": "Person",
+        "name": "Sirawut Chaixanien",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Cornell University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Claire Cardie",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Cornell University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Bharath Hariharan",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Cornell University"
+        }
+      }
+    ],
+    "datePublished": "2026-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Arxiv"
+    },
+    "url": "https://sshaar.github.io/MovieRecapsQA/",
+    "image": "https://sshaar.github.io/MovieRecapsQA/static/images/social_preview.png",
+    "keywords": ["video question answering", "long-form video question answering", "multimodal video question answering", "videoQA", "Multimodal videoQA", "videoQA benchmark"],
+    "abstract": "Understanding real-world videos such as movies requires integrating visual and dialogue cues to answer complex questions. Yet existing VideoQA benchmarks struggle to capture this multimodal reasoning and are largely not open-ended, given the difficulty of evaluating free-form answers.In this paper, we introduce a novel open-ended multi-modal VideoQA benchmark, MovieRecapsQA created using movie recap videos—a distinctive type of YouTube content that summarizes a film by presenting its key events through synchronized visual (recap video) and textual (recap summary) modalities. Using the recap summary, we generate $\approx 8.2$K question-answer (QA) pairs (aligned with movie-subtitles) and provide the necessary ``facts'' needed to verify an answer in a reference-free manner. To our knowledge, this is the first open-ended VideoQA benchmark that supplies explicit textual context of the input (video and/or text); which we use for evaluation. Our benchmark provides videos of multiple lengths (i.e., recap-segments, movie-segments) and categorizations of questions (by modality and type) to enable fine-grained analysis. We evaluate the performance of seven state-of-the-art MLLMs using our benchmark and observe that: 1) visual-only questions remain the most challenging; 2) models default to textual inputs whenever available; 3) extracting factually accurate information from video content is still difficult for all models; and 4) proprietary and open-source models perform comparably on video-dependent questions.",
+    "citation": "",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://sshaar.github.io/MovieRecapsQA/"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "computer vision"
+      },
+      {
+        "@type": "Thing",
+        "name": "multimodal video question answering"
+      },
+      {
+        "@type": "Thing",
+        "name": "long-form video understanding"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Cornell University",
+    "url": "https://www.cs.cornell.edu/",
+    "logo": "https://www.cs.cornell.edu/themes/custom/computer_science/logo.svg",
+    "sameAs": [
+      "https://twitter.com/Cornell_CS"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://sshaar.github.io" target="_blank">Shaden Shaar</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://bradonthymes.com" target="_blank">Bradon Thymes</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                Sirawut Chaixanien, 
+              </span>
+              <span class="author-block">
+                Claire Cardie, 
+              </span>
+              <span class="author-block">
+                Bharath Hariharan
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Cornell University</span>
+              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://github.com/sshaar/MovieRecapsQA.git" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- TODO: Update with your arXiv paper ID -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Teaser Image-->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img src="static/images/dataset_creation_3.png" alt="Dataset Creation" id="tree" height="100%" loading="lazy"/>
+      </div>
+    </div>
+  </section>
+<!-- End teaser Image -->
+
+<!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Understanding real-world videos such as movies requires integrating visual and dialogue cues to answer complex questions. Yet existing VideoQA benchmarks struggle to capture this multimodal reasoning and are largely not open-ended, given the difficulty of evaluating free-form answers.In this paper, we introduce a novel open-ended multi-modal VideoQA benchmark, MovieRecapsQA created using movie recap videos—a distinctive type of YouTube content that summarizes a film by presenting its key events through synchronized visual (recap video) and textual (recap summary) modalities. Using the recap summary, we generate ≈ 8.2 K question-answer (QA) pairs (aligned with movie-subtitles) and provide the necessary ``facts'' needed to verify an answer in a reference-free manner. To our knowledge, this is the first open-ended VideoQA benchmark that supplies explicit textual context of the input (video and/or text); which we use for evaluation. Our benchmark provides videos of multiple lengths (i.e., recap-segments, movie-segments) and categorizations of questions (by modality and type) to enable fine-grained analysis. We evaluate the performance of seven state-of-the-art MLLMs using our benchmark and observe that: 1) visual-only questions remain the most challenging; 2) models default to textual inputs whenever available; 3) extracting factually accurate information from video content is still difficult for all models; and 4) proprietary and open-source models perform comparably on video-dependent questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- End paper abstract -->
+
+
+<!-- Dataset Explorer -->
+<!-- Dataset Explorer -->
+  <section class="section" id="dataset-explorer" class="hero is-small">
+    <div class="container">
+      <h2 class="title is-centered has-text-centered is-3">Dataset Explorer: MovieRecapsQA</h2>
+      <div class="mrq-explorer columns is-variable is-4">
+
+        <!-- Left Panel -->
+        <aside class="column is-one-quarter mrq-example-list">
+          <h3 class="title is-5">Examples</h3>
+          <ul id="mrq-example-list" class="mrq-example-list-ul"></ul>
+        </aside>
+
+        <!-- Right Panel -->
+        <main class="column mrq-example-detail box" id="mrq-example-detail">
+          <p>Select an example from the left panel.</p>
+        </main>
+
+      </div>
+    </div>
+  </section>
+<!-- End Dataset Explorer -->
+
+
+
+<!-- Paper poster -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+      </div>
+    </div>
+  </section> -->
+<!--End paper poster -->
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{movierecapsqa2026,
+  title={MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark},
+  author={Shaden Shaar and Bradon Thymes and Sirawut Chaixanien and Claire Cardie and Bharath Hariharan},
+  year={2026},
+  url={}}</code></pre>
+    </div>
+  </section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+<script src="static/js/tracker.js"></script>
+<noscript><div class="statcounter"><a title="web analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/YOUR_PROJECT_ID/0/YOUR_SECURITY_CODE/1/" alt="web analytics"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+  </body>
+  </html>

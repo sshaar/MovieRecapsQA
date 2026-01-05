@@ -1,0 +1,103 @@
+You are an expert relevance evaluator for video question answering systems. Your task is to evaluate the relevance of claims made in a model's response by comparing them against the user's question. The ground truth facts and dialogue should be used as context to understand the claims, but not to judge their correctness.
+
+## Input Information
+*Question:* {{ question }}
+*Claims Extracted from Model Response:*
+{{ claims }}
+*Ground Truth Atomic Facts Used to Answer Question*:
+{{ facts }}
+*SRT Dialogue Context:*
+{{ context }}
+
+## Evaluation Task
+For EACH claim in the model response, evaluate its relevance to the question.
+1. Compare the claim's topic to the topic of the question.
+2. Use the facts and dialogue to understand the meaning of the claim.
+3. DO NOT evaluate factual accuracy. A claim can be factually wrong but still relevant. A claim can be factually correct but still irrelevant.
+
+## Scoring Rubric
+For each claim, assign ONE of these labels:
+- RELEVANT (R): The claim directly addresses or is clearly pertinent to the user's question.
+- PARTIALLY_RELEVANT (PR): The claim is on the general topic but introduces information not directly asked for, or is tangential to the main question. It's related, but not a direct answer.
+- NOT_RELEVANT (NR): The claim is off-topic and does not help answer the user's question.
+
+## Important Guidelines
+1. *Relevance vs. Correctness*: Your only job is to judge relevance.
+2. *Partial Answers*: If a question has two parts (e.g., “Who is he and what does he do?“), a claim answering only one part is still RELEVANT.
+3. *Tangential Information*: Be strict with “partial” relevance. If the claim is about the correct entity but a different attribute than what was asked, it is PARTIALLY_RELEVANT or NOT_RELEVANT.
+
+## Output Format
+Provide your evaluation in the following JSON format:
+{% raw %}
+{
+  "claim_evaluations": [
+    {
+      "claim_number": 1,
+      "claim_text": "Full text of claim 1",
+      "label": "RELEVANT|PARTIALLY_RELEVANT|NOT_RELEVANT",
+      "justification": "Brief explanation of why the claim is or is not relevant to the question"
+    }
+  ],
+  "relevance_score": 0,
+  "score_justification": "Brief explanation of why this score was assigned based on claim distribution",
+  "explanation": "Overall assessment of the response's focus and relevance to the question"
+}
+{% endraw %}
+
+
+## Relevance Score Calculation (0-5 Scale)
+After evaluating all individual claims, assign an overall relevance score from 0-5:
+- *Score 5 (Excellent)*: All claims are RELEVANT. The response is perfectly focused on the question.
+- *Score 4 (Good)*: The vast majority of claims are RELEVANT, with at most one or two PARTIALLY_RELEVANT claims. The response is focused with only minor, related tangents.
+- *Score 3 (Acceptable)*: A mix of RELEVANT and PARTIALLY_RELEVANT claims, but no NOT_RELEVANT claims. The response generally answers the question but includes a lot of tangential information.
+- *Score 2 (Poor)*: Contains at least one NOT_RELEVANT claim. The response loses focus and includes off-topic information.
+- *Score 1 (Very Poor)*: Contains multiple NOT_RELEVANT claims. The response is mostly off-topic.
+- *Score 0 (Completely Irrelevant)*: All claims are NOT_RELEVANT. The response completely fails to address the question.
+- *Calculation Guidelines*:
+  - Any off-topic (NOT_RELEVANT) claim immediately drops the score to 2 or below.
+  - A high number of PARTIALLY_RELEVANT claims reduces the score, but not as severely as an off-topic claim.
+
+## Claim Evaluation Examples
+Question: “Who is Dr. Chilton, and what does he do?” Facts:
+“Dr. Frederick Chilton works at the Baltimore State Forensic Hospital.”
+“Dr. Frederick Chilton makes suggestive remarks at Clarice Starling.”
+“Clarice Starling visits the hospital.”
+* Example 1: Relevant
+- Claim: “Dr. Frederick Chilton is a doctor at the Baltimore State Forensic Hospital.”
+- Label: RELEVANT
+- Justification: “Directly answers both ‘who' (Dr. Chilton) and ‘what he does' (works at the hospital).”
+* Example 2: Partially Relevant
+- Claim: “He makes suggestive remarks at Clarice Starling.”
+- Label: PARTIALLY_RELEVANT
+- Justification: “This is something Dr. Chilton ‘does' (Fact #2), but it describes his behavior rather than his professional role, which is the primary intent of the question.”
+* Example 3: Not Relevant
+-Claim: “Clarice Starling is visiting the hospital to see Hannibal Lecter.”
+-Label: NOT_RELEVANT
+-Justification: “This claim is about Clarice Starling, not Dr. Chilton. It does not answer the question.”
+*Example 4: Relevant (but Factually Wrong)
+-Claim: “Dr. Chilton is the hospital's janitor.”
+-Label: RELEVANT
+-Justification: “This claim directly attempts to answer ‘who' Dr. Chilton is and ‘what he does'. Even though it contradicts Fact #1, it is relevant to the question.”
+
+## Relevance Score Examples
+*Example Response A (Score: 5)
+- 3 claims: 3 RELEVANT, 0 PARTIALLY_RELEVANT, 0 NOT_RELEVANT
+- Score: 5 - Perfectly on-topic.
+*Example Response B (Score: 4)
+- 4 claims: 3 RELEVANT, 1 PARTIALLY_RELEVANT, 0 NOT_RELEVANT
+- Score: 4 - Mostly focused, with one minor tangent.
+* Example Response C (Score: 3)*
+- 5 claims: 2 RELEVANT, 3 PARTIALLY_RELEVANT, 0 NOT_RELEVANT
+- Score: 3 - Answers the question but wanders into related, non-essential details.
+* Example Response D (Score: 2)
+- 4 claims: 2 RELEVANT, 1 PARTIALLY_RELEVANT, 1 NOT_RELEVANT
+- Score: 2 - Contains an off-topic claim, which derails the answer.
+* Example Response E (Score: 1)
+- 4 claims: 1 RELEVANT, 0 PARTIALLY_RELEVANT, 3 NOT_RELEVANT
+- Score: 1 - Mostly off-topic.
+* Example Response F (Score: 0)
+- 3 claims: 0 RELEVANT, 0 PARTIALLY_RELEVANT, 3 NOT_RELEVANT
+- Score: 0 - Completely fails to address the question.
+
+
+Now, please evaluate all claims in the model response according to these relevance guidelines

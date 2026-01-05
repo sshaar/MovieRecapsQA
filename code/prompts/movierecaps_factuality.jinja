@@ -1,0 +1,110 @@
+You are an expert factuality evaluator for video question answering systems. Your task is to evaluate the factual accuracy of claims made in a model's response by comparing them against ground truth atomic facts and dialogue from the same video segment.
+
+## Input Information
+*Question:* {{ question }}
+*Claims Extracted from Model Response:*
+{{ claims }}
+*Ground Truth Atomic Facts from Video Segment:*
+{{ facts }}
+*SRT Dialogue Context:*
+{{ context }}
+
+## Evaluation Task
+For EACH claim in the model response, evaluate its factual accuracy by checking against:
+1. The ground truth atomic facts
+2. The SRT dialogue context
+
+## Scoring Rubric
+For each claim, assign ONE of these labels:
+- *SUPPORTED (S)*: The claim is directly supported by the ground truth facts or dialogue. The information matches accurately.
+- *PARTIALLY_SUPPORTED (PS)*: The claim contains some accurate information but also includes unsupported details, or is less precise than the ground truth.
+- *UNSUPPORTED (U)*: The claim makes statements that are not mentioned in the ground truth facts or dialogue. This may be a reasonable inference but lacks direct support.
+- *CONTRADICTORY (C)*: The claim directly contradicts information in the ground truth facts or dialogue.
+- *NOT_CHECKABLE (NC)*: The claim cannot be verified from the provided facts and dialogue (e.g., references information from outside the segment).
+## Important Guidelines
+1. *Penalize hallucinations strictly*:
+   - Any claim adding information not in facts/dialogue should be marked UNSUPPORTED or CONTRADICTORY
+   - Be especially careful with specific titles, roles, or relationships
+2. *Consider the dialogue*:
+   - The SRT dialogue may contain information not captured in atomic facts
+   - Check both sources before marking something as unsupported
+
+## Output Format
+Provide your evaluation in the following JSON format:
+{% raw %}
+{
+  "claim_evaluations": [
+    {
+      "claim_number": 1,
+      "claim_text": "Full text of claim 1",
+      "label": "SUPPORTED|PARTIALLY_SUPPORTED|UNSUPPORTED|CONTRADICTORY|NOT_CHECKABLE",
+      "justification": "Brief explanation referencing specific facts or dialogue",
+      "supporting_facts": ["List of facts that support this claim from the given input"],
+      "supporting_dialogue": "Relevant dialogue excerpt if applicable"
+    }
+  ],
+  "factuality_score": 0,
+  "score_justification": "Brief explanation of why this score was assigned based on claim distribution",
+  "explanation": "Overall assessment of the response's factuality"
+}
+{% endraw %}
+
+## Factuality Score Calculation (0-5 Scale)
+After evaluating all individual claims, assign an overall factuality score from 0-5 based on the aggregate quality:
+*Score 5 (Excellent)*: All claims are SUPPORTED. No unsupported or contradictory information.
+*Score 4 (Good)*: Majority of claims are SUPPORTED, with at most minor PARTIALLY_SUPPORTED claims. No contradictions or hallucinations.
+*Score 3 (Acceptable)*: Mix of SUPPORTED and PARTIALLY_SUPPORTED claims, or some UNSUPPORTED claims present but no contradictions. The response is generally accurate but has gaps.
+*Score 2 (Poor)*: Multiple UNSUPPORTED claims or at least one CONTRADICTORY claim. Significant factual issues present.
+*Score 1 (Very Poor)*: Mostly UNSUPPORTED or multiple CONTRADICTORY claims. The response contains more incorrect than correct information.
+*Score 0 (Completely Incorrect)*: All claims are CONTRADICTORY or UNSUPPORTED. The response is factually wrong or completely fabricated.
+*Calculation Guidelines:*
+- Prioritize accuracy over completeness
+- Contradictions are more severe than unsupported claims
+- Weight recent claims equally (don't discount later claims)
+- Consider the proportion: % supported, % partially supported, % unsupported, % contradictory
+
+## Examples
+*Example 1: Supported Claim*
+- Claim: “Dr. Chilton works at the Baltimore State Forensic Hospital”
+- Fact: “Dr. Frederick Chilton works at the Baltimore State Forensic Hospital”
+- Dialogue: Contains “Baltimore State Forensic Hospital”
+- Label: SUPPORTED
+- Justification: “Directly matches fact #1 and is mentioned in dialogue”
+*Example 2: Partially Supported*
+- Claim: “Dr. Chilton is the head psychiatrist for Lecter”
+- Facts: “Dr. Chilton explains they have tried to study Lecter”, “Lecter is their most prized asset”
+- Label: PARTIALLY_SUPPORTED
+- Justification: “While Chilton clearly has authority over Lecter's care, the specific title ‘head psychiatrist' is not stated in facts or dialogue”
+*Example 3: Unsupported*
+- Claim: “Dr. Chilton has been working at the facility for 10 years”
+- Facts: No mention of duration
+- Label: UNSUPPORTED
+- Justification: “No information about length of employment in facts or dialogue”
+*Example 4: Contradictory*
+- Claim: “Dr. Chilton is kind and respectful to Clarice”
+- Dialogue: Shows Chilton making suggestive remarks
+- Fact: “Dr. Chilton makes suggestive remarks at Clarice Starling”
+- Label: CONTRADICTORY
+- Justification: “Contradicts fact #2 which states he makes suggestive remarks”
+## Overall Score Examples
+*Example Response A* (Score: 5)
+- 3 claims: 3 SUPPORTED, 0 PARTIALLY_SUPPORTED, 0 UNSUPPORTED, 0 CONTRADICTORY
+- Score: 5 - All claims are directly supported by facts
+*Example Response B* (Score: 4)
+- 4 claims: 3 SUPPORTED, 1 PARTIALLY_SUPPORTED, 0 UNSUPPORTED, 0 CONTRADICTORY
+- Score: 4 - Mostly supported with one minor imprecision
+*Example Response C* (Score: 3)
+- 5 claims: 2 SUPPORTED, 2 PARTIALLY_SUPPORTED, 1 UNSUPPORTED, 0 CONTRADICTORY
+- Score: 3 - Mix of accurate and unsupported, but no contradictions
+*Example Response D* (Score: 2)
+- 4 claims: 1 SUPPORTED, 1 PARTIALLY_SUPPORTED, 1 UNSUPPORTED, 1 CONTRADICTORY
+- Score: 2 - Contains contradiction and multiple issues
+*Example Response E* (Score: 1)
+- 4 claims: 0 SUPPORTED, 1 PARTIALLY_SUPPORTED, 3 UNSUPPORTED, 0 CONTRADICTORY
+- Score: 1 - Mostly hallucinated information
+*Example Response F* (Score: 0)
+- 3 claims: 0 SUPPORTED, 0 PARTIALLY_SUPPORTED, 1 UNSUPPORTED, 2 CONTRADICTORY
+- Score: 0 - Contradicts ground truth facts
+
+
+Now, please evaluate all claims in the model response according to these guidelines.
