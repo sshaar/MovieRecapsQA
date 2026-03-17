@@ -50,7 +50,7 @@
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="Under Review">
   <!-- TODO: Add arxive link -->
-  <meta name="citation_pdf_url" content="ARXIVLINK_HERE">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2601.02536.pdf">
   
   <!-- Additional SEO -->
   <meta name="theme-color" content="#2563eb">
@@ -75,7 +75,7 @@
   
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="static/css/index.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
@@ -144,7 +144,7 @@
     "url": "https://sshaar.github.io/MovieRecapsQA/",
     "image": "https://sshaar.github.io/MovieRecapsQA/static/images/social_preview.png",
     "keywords": ["video question answering", "long-form video question answering", "multimodal video question answering", "videoQA", "Multimodal videoQA", "videoQA benchmark"],
-    "abstract": "Understanding real-world videos such as movies requires integrating visual and dialogue cues to answer complex questions. Yet existing VideoQA benchmarks struggle to capture this multimodal reasoning and are largely not open-ended, given the difficulty of evaluating free-form answers.In this paper, we introduce a novel open-ended multi-modal VideoQA benchmark, MovieRecapsQA created using movie recap videos—a distinctive type of YouTube content that summarizes a film by presenting its key events through synchronized visual (recap video) and textual (recap summary) modalities. Using the recap summary, we generate $\approx 8.2$K question-answer (QA) pairs (aligned with movie-subtitles) and provide the necessary ``facts'' needed to verify an answer in a reference-free manner. To our knowledge, this is the first open-ended VideoQA benchmark that supplies explicit textual context of the input (video and/or text); which we use for evaluation. Our benchmark provides videos of multiple lengths (i.e., recap-segments, movie-segments) and categorizations of questions (by modality and type) to enable fine-grained analysis. We evaluate the performance of seven state-of-the-art MLLMs using our benchmark and observe that: 1) visual-only questions remain the most challenging; 2) models default to textual inputs whenever available; 3) extracting factually accurate information from video content is still difficult for all models; and 4) proprietary and open-source models perform comparably on video-dependent questions.",
+    "abstract": "Understanding real-world videos such as movies requires integrating visual and dialogue cues to answer complex questions. Yet existing VideoQA benchmarks struggle to capture this multimodal reasoning and are largely not open-ended, given the difficulty of evaluating free-form answers.In this paper, we introduce a novel open-ended multi-modal VideoQA benchmark, MovieRecapsQA created using movie recap videos—a distinctive type of YouTube content that summarizes a film by presenting its key events through synchronized visual (recap video) and textual (recap summary) modalities. Using the recap summary, we generate $\approx 8.2$K question-answer (QA) pairs (aligned with movie-subtitles) and provide the necessary "facts" needed to verify an answer in a reference-free manner. To our knowledge, this is the first open-ended VideoQA benchmark that supplies explicit textual context of the input (video and/or text); which we use for evaluation. Our benchmark provides videos of multiple lengths (i.e., recap-segments, movie-segments) and categorizations of questions (by modality and type) to enable fine-grained analysis. We evaluate the performance of seven state-of-the-art MLLMs using our benchmark and observe that: 1) visual-only questions remain the most challenging; 2) models default to textual inputs whenever available; 3) extracting factually accurate information from video content is still difficult for all models; and 4) proprietary and open-source models perform comparably on video-dependent questions.",
     "citation": "",
     "isAccessibleForFree": true,
     "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -219,12 +219,14 @@
             <div class="is-size-5 publication-authors">
               <span class="author-block">Cornell University</span>
               <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+              <br>
+              <span class="author-block cvpr-label">CVPR 2026</span>
             </div>
 
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                  <a href="https://arxiv.org/pdf/2601.02536.pdf" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -244,12 +246,22 @@
                 </span>
                 <!-- TODO: Update with your arXiv paper ID -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/abs/2601.02536" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark arxiv-link">
                     <span class="icon">
-                      <i class="ai ai-arxiv"></i>
+                      <i class="ai ai-arxiv" aria-hidden="true"></i>
                     </span>
                     <span>arXiv</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#model-leaderboard"
+                  class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-trophy" aria-hidden="true"></i>
+                    </span>
+                    <span>Leaderboard</span>
                   </a>
                 </span>
               </div>
@@ -278,7 +290,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Understanding real-world videos such as movies requires integrating visual and dialogue cues to answer complex questions. Yet existing VideoQA benchmarks struggle to capture this multimodal reasoning and are largely not open-ended, given the difficulty of evaluating free-form answers.In this paper, we introduce a novel open-ended multi-modal VideoQA benchmark, MovieRecapsQA created using movie recap videos—a distinctive type of YouTube content that summarizes a film by presenting its key events through synchronized visual (recap video) and textual (recap summary) modalities. Using the recap summary, we generate ≈ 8.2 K question-answer (QA) pairs (aligned with movie-subtitles) and provide the necessary ``facts'' needed to verify an answer in a reference-free manner. To our knowledge, this is the first open-ended VideoQA benchmark that supplies explicit textual context of the input (video and/or text); which we use for evaluation. Our benchmark provides videos of multiple lengths (i.e., recap-segments, movie-segments) and categorizations of questions (by modality and type) to enable fine-grained analysis. We evaluate the performance of seven state-of-the-art MLLMs using our benchmark and observe that: 1) visual-only questions remain the most challenging; 2) models default to textual inputs whenever available; 3) extracting factually accurate information from video content is still difficult for all models; and 4) proprietary and open-source models perform comparably on video-dependent questions.
+              Understanding real-world videos such as movies requires integrating visual and dialogue cues to answer complex questions. Yet existing VideoQA benchmarks struggle to capture this multimodal reasoning and are largely not open-ended, given the difficulty of evaluating free-form answers.In this paper, we introduce a novel open-ended multi-modal VideoQA benchmark, MovieRecapsQA created using movie recap videos—a distinctive type of YouTube content that summarizes a film by presenting its key events through synchronized visual (recap video) and textual (recap summary) modalities. Using the recap summary, we generate ≈ 8.2 K question-answer (QA) pairs (aligned with movie-subtitles) and provide the necessary "facts" needed to verify an answer in a reference-free manner. To our knowledge, this is the first open-ended VideoQA benchmark that supplies explicit textual context of the input (video and/or text); which we use for evaluation. Our benchmark provides videos of multiple lengths (i.e., recap-segments, movie-segments) and categorizations of questions (by modality and type) to enable fine-grained analysis. We evaluate the performance of seven state-of-the-art MLLMs using our benchmark and observe that: 1) visual-only questions remain the most challenging; 2) models default to textual inputs whenever available; 3) extracting factually accurate information from video content is still difficult for all models; and 4) proprietary and open-source models perform comparably on video-dependent questions.
             </p>
           </div>
         </div>

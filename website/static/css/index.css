@@ -82,6 +82,13 @@ body {
     margin: 8px 4px;
 }
 
+.publication-links .arxiv-link .icon i.ai {
+  font-family: Academicons !important;
+  font-size: 1.1em;
+  line-height: 1;
+  vertical-align: middle;
+}
+
 .dnerf {
   font-variant: small-caps;
 }
@@ -306,6 +313,11 @@ body {
   font-size: 0.875rem;
   color: var(--text-light);
   font-style: italic;
+}
+
+.cvpr-label {
+  font-size: 1.1em;
+  font-weight: 700;
 }
 
 /* Section Titles */
