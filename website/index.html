@@ -203,7 +203,7 @@
                 <a href="https://sshaar.github.io" target="_blank">Shaden Shaar</a><sup>*</sup>,
               </span>
               <span class="author-block">
-                <a href="https://bradonthymes.com" target="_blank">Bradon Thymes</a><sup>*</sup>,
+                <a href="https://bradonthymes.github.io/" target="_blank">Bradon Thymes</a><sup>*</sup>,
               </span>
               <span class="author-block">
                 Sirawut Chaixanien, 
@@ -286,6 +286,163 @@
     </div>
   </section>
 <!-- End paper abstract -->
+
+<!-- Model Leaderboard -->
+  <section class="section" id="model-leaderboard">
+    <div class="container is-fluid leaderboard-container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Leaderboard</h2>
+          <p class="leaderboard-subtitle">
+            Reference-free evaluation metrics on MovieRecapsQA.
+          </p>
+        </div>
+      </div>
+
+      <div class="leaderboard-table-wrap">
+        <table class="table is-fullwidth leaderboard-table" aria-label="Model leaderboard">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Model</th>
+              <th>Overall Factuality</th>
+              <th>Overall Relevance</th>
+              <th>Dialogue</th>
+              <th>Scene</th>
+              <th>Multimodal</th>
+              <th>CRD</th>
+              <th>NPA</th>
+              <th>STA</th>
+              <th>TEMP</th>
+              <th>TH</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="leaderboard-rank-cell">1</td>
+              <td>
+                <span class="leaderboard-model-name">GPT-4o</span>
+                <span class="leaderboard-model-org">OpenAI</span>
+              </td>
+              <td class="leaderboard-metric">3.99</td>
+              <td class="leaderboard-metric">3.97</td>
+              <td class="leaderboard-metric">3.76</td>
+              <td class="leaderboard-metric">3.43</td>
+              <td class="leaderboard-metric">3.66</td>
+              <td class="leaderboard-metric">3.73</td>
+              <td class="leaderboard-metric">3.64</td>
+              <td class="leaderboard-metric">3.10</td>
+              <td class="leaderboard-metric">3.58</td>
+              <td class="leaderboard-metric">3.55</td>
+            </tr>
+            <tr>
+              <td class="leaderboard-rank-cell">2</td>
+              <td>
+                <span class="leaderboard-model-name">Claude 3.5 Sonnet</span>
+                <span class="leaderboard-model-org">Anthropic</span>
+              </td>
+              <td class="leaderboard-metric">3.76</td>
+              <td class="leaderboard-metric">3.92</td>
+              <td class="leaderboard-metric">3.69</td>
+              <td class="leaderboard-metric">3.17</td>
+              <td class="leaderboard-metric">3.58</td>
+              <td class="leaderboard-metric">3.65</td>
+              <td class="leaderboard-metric">3.42</td>
+              <td class="leaderboard-metric">3.12</td>
+              <td class="leaderboard-metric">3.30</td>
+              <td class="leaderboard-metric">3.44</td>
+            </tr>
+            <tr>
+              <td class="leaderboard-rank-cell">3</td>
+              <td>
+                <span class="leaderboard-model-name">Amazon Nova Lite</span>
+                <span class="leaderboard-model-org">Amazon</span>
+              </td>
+              <td class="leaderboard-metric">3.53</td>
+              <td class="leaderboard-metric">3.93</td>
+              <td class="leaderboard-metric">3.73</td>
+              <td class="leaderboard-metric">3.35</td>
+              <td class="leaderboard-metric">3.58</td>
+              <td class="leaderboard-metric">3.59</td>
+              <td class="leaderboard-metric">3.60</td>
+              <td class="leaderboard-metric">3.15</td>
+              <td class="leaderboard-metric">3.51</td>
+              <td class="leaderboard-metric">3.37</td>
+            </tr>
+            <tr>
+              <td class="leaderboard-rank-cell">4</td>
+              <td>
+                <span class="leaderboard-model-name">Qwen 2.5VL</span>
+                <span class="leaderboard-model-org">Alibaba</span>
+              </td>
+              <td class="leaderboard-metric">3.47</td>
+              <td class="leaderboard-metric">3.83</td>
+              <td class="leaderboard-metric">3.50</td>
+              <td class="leaderboard-metric">3.28</td>
+              <td class="leaderboard-metric">3.35</td>
+              <td class="leaderboard-metric">3.42</td>
+              <td class="leaderboard-metric">3.40</td>
+              <td class="leaderboard-metric">3.07</td>
+              <td class="leaderboard-metric">3.39</td>
+              <td class="leaderboard-metric">3.27</td>
+            </tr>
+            <tr>
+              <td class="leaderboard-rank-cell">5</td>
+              <td>
+                <span class="leaderboard-model-name">Gemini 2.5 Flash</span>
+                <span class="leaderboard-model-org">Google</span>
+              </td>
+              <td class="leaderboard-metric">3.26</td>
+              <td class="leaderboard-metric">3.70</td>
+              <td class="leaderboard-metric">3.34</td>
+              <td class="leaderboard-metric">2.65</td>
+              <td class="leaderboard-metric">3.03</td>
+              <td class="leaderboard-metric">3.15</td>
+              <td class="leaderboard-metric">3.00</td>
+              <td class="leaderboard-metric">2.57</td>
+              <td class="leaderboard-metric">2.53</td>
+              <td class="leaderboard-metric">3.16</td>
+            </tr>
+            <tr>
+              <td class="leaderboard-rank-cell">6</td>
+              <td>
+                <span class="leaderboard-model-name">Mini-CPM-o</span>
+                <span class="leaderboard-model-org">OpenBMB</span>
+              </td>
+              <td class="leaderboard-metric">3.21</td>
+              <td class="leaderboard-metric">3.61</td>
+              <td class="leaderboard-metric">3.15</td>
+              <td class="leaderboard-metric">3.00</td>
+              <td class="leaderboard-metric">3.09</td>
+              <td class="leaderboard-metric">3.14</td>
+              <td class="leaderboard-metric">3.10</td>
+              <td class="leaderboard-metric">2.76</td>
+              <td class="leaderboard-metric">3.02</td>
+              <td class="leaderboard-metric">3.02</td>
+            </tr>
+            <tr>
+              <td class="leaderboard-rank-cell">7</td>
+              <td>
+                <span class="leaderboard-model-name">LLaVA-Next-Video</span>
+                <span class="leaderboard-model-org">LLaVA Team</span>
+              </td>
+              <td class="leaderboard-metric">2.96</td>
+              <td class="leaderboard-metric">3.35</td>
+              <td class="leaderboard-metric">2.99</td>
+              <td class="leaderboard-metric">2.88</td>
+              <td class="leaderboard-metric">2.88</td>
+              <td class="leaderboard-metric">2.99</td>
+              <td class="leaderboard-metric">2.90</td>
+              <td class="leaderboard-metric">2.65</td>
+              <td class="leaderboard-metric">3.04</td>
+              <td class="leaderboard-metric">2.78</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+<!-- End Model Leaderboard -->
 
 
 <!-- Dataset Explorer -->
