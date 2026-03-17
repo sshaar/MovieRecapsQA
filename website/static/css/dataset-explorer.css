@@ -187,6 +187,8 @@
 .mrq-model-table th:nth-child(1),
 .mrq-model-table td:nth-child(1) {
   width: 18%; /* Model name */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .mrq-model-table th:nth-child(2),
@@ -235,6 +237,29 @@
 @media (max-width: 768px) {
   .mrq-video-dialogue-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mrq-model-table th:nth-child(1),
+  .mrq-model-table td:nth-child(1) {
+    width: 20%;
+  }
+
+  .mrq-model-table th:nth-child(2),
+  .mrq-model-table td:nth-child(2) {
+    width: 50%;
+  }
+
+  .mrq-model-table th:nth-child(3),
+  .mrq-model-table td:nth-child(3),
+  .mrq-model-table th:nth-child(4),
+  .mrq-model-table td:nth-child(4) {
+    width: 15%;
+  }
+
+  .mrq-model-table td,
+  .mrq-model-table th {
+    padding: 0.55rem;
+    font-size: 0.9rem;
   }
   
   .mrq-dialogue-box {
