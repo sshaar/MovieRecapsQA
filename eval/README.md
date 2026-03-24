@@ -64,22 +64,29 @@ python batch_openai.py process-claims \
     --output data/extracted_claims.jsonl
 ```
 
-### Evaluation Batches
+### Output Files (Generated)
 
-After extracting claims, create evaluation batches:
+```
+outputs/
+├── model_name_responses.jsonl      # Model answers
+├── model_name_evaluation.jsonl     # Evaluation results
+└── model_name_analysis/
+    ├── summary_statistics.json
+    ├── evaluation_results.csv
+    └── *_score_distribution.txt
 
-```bash
-for metric in factuality coherence relevance; do
-    python batch_openai.py create-eval \
-        --claims-file data/extracted_claims.jsonl \
-        --output-dir batches/${metric} \
-        --metric ${metric} \
-        --model gpt-4o-mini
+batches/
+├── claims/
+│   ├── batch-000000.jsonl          # Batch requests
+│   ├── batch-001000.jsonl
+│   └── ...
+├── claims-output/
+│   ├── batch-000000.jsonl          # Batch results
+│   └── ...
+└── claims_batch_ids.json           # Tracking
 
-    python batch_openai.py submit \
-        --batch-dir batches/${metric} \
-        --output batches/${metric}_ids.json
-done
+data/
+└── extracted_claims.jsonl          # Processed claims
 ```
 
 ## Input/Output Formats
