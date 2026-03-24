@@ -20,15 +20,17 @@ OPENAI_API_KEY=sk-...
 HF_DATASET_NAME=your-username/movierecaps-qa
 ```
 
-## Batch Evaluation
+## Evaluation
 
-### Quick Start
+### OpenAI Batch Requests (Preferable)
+
+#### Quick Start
 ```bash
 # Complete pipeline
 ./run_batch_pipeline.sh all
 ```
 
-### Step-by-Step
+#### Step-by-Step
 
 **1. Create batch files**
 ```bash
@@ -64,7 +66,7 @@ python batch_openai.py process-claims \
     --output data/extracted_claims.jsonl
 ```
 
-### Output Files (Generated)
+#### Output Files (Generated)
 
 ```
 outputs/
@@ -87,6 +89,14 @@ batches/
 
 data/
 └── extracted_claims.jsonl          # Processed claims
+```
+
+
+### LitLLM Evaluation
+#### Quick Start
+```bash
+# Complete pipeline
+./run_eval.sh gpt4-output
 ```
 
 ## Input/Output Formats
