@@ -1,0 +1,109 @@
+You are an expert coherence evaluator for video question answering systems. Your task is to evaluate the internal logical coherence of a model's response by comparing the claims it makes against each other. A coherent response should not contain claims that contradict one another or are excessively redundant.
+
+## Input Information
+*Question:* {{ question }}
+*Claims Extracted from Model Response:*
+{{ claims }}
+
+## Evaluation Task
+For EACH claim in the model response, evaluate its logical consistency by checking against:
+- All other claims in the same response.
+- The goal is to identify internal contradictions.
+
+## Scoring Rubric
+For each claim, assign ONE of these labels:
+- CONSISTENT (CO): The claim is logically consistent with all other claims in the response. It introduces new information or builds on previous claims without conflict.
+- REDUNDANT (R): The claim essentially repeats information already stated in another claim, using different wording. This is a minor coherence flaw but not a contradiction.
+- CONTRADICTORY (C): The claim directly contradicts information or logic present in one or more other claims.
+
+
+## Important Guidelines
+1. Strict Contradictions: Look for direct logical opposites.
+e.g., “Tony is happy” vs. “Tony is sad.”
+e.g., “The event happened in the morning” vs. “The event happened at 10 PM.”
+2. Specificity is Not Contradiction: A more specific claim is not a contradiction.
+e.g., “Tony is a doctor” and “Tony is a brain surgeon” are CONSISTENT.
+e.g., “Tony is wearing a suit” and “Tony is wearing a blue suit” are CONSISTENT.
+3. Redundancy: Identify claims that add no new information.
+e.g., “1. Tony ran quickly” and “2. Tony's speed was fast” -> Claim 2 is REDUNDANT.
+4. Reference Other Claims: In your justification for REDUNDANT or CONTRADICTORY labels, you must state the claim number of the other claim involved in the pair.
+e.g., Justification: “Contradicts claim #2, which states Tony was sad.”
+
+## Output Format
+Provide your evaluation in the following JSON format:
+{% raw %}
+{
+  "claim_evaluations": [
+    {
+      "claim_number": 1,
+      "claim_text": "Full text of claim 1",
+      "label": "CONSISTENT|REDUNDANT|CONTRADICTORY",
+      "justification": "Brief explanation. If REDUNDANT or CONTRADICTORY, must state which claim number is related (e.g., 'Contradicts claim #4')."
+    }
+  ],
+  "coherence_score": 0,
+  "score_justification": "Brief explanation of why this score was assigned based on claim distribution",
+  "explanation": "Overall assessment of the response's internal consistency"
+}
+{% endraw %}
+
+
+## Coherence Score Calculation (0-5 Scale)
+After evaluating all individual claims, assign an overall coherence score from 0-5.
+- *Score 5 (Excellent)*: All claims are CONSISTENT. The response is perfectly logical and non-repetitive.
+- *Score 4 (Good)*: The vast majority of claims are CONSISTENT, with at most one or two REDUNDANT claims. No contradictions.
+- *Score 3 (Acceptable)*: Contains several REDUNDANT claims, making the response repetitive, but there are no CONTRADICTORY claims. The logic is sound, but poorly expressed.
+- *Score 2 (Poor)*: Contains at least one pair of CONTRADICTORY claims. The presence of any internal contradiction is a significant logical flaw.
+- *Score 1 (Very Poor)*: Contains multiple CONTRADICTORY claims. The response is logically confusing and hard to follow.
+- *Score 0 (Completely Incoherent)*: The majority of claims are CONTRADICTORY. The response is a logical mess and makes no sense.
+
+- *Calculation Guidelines*:
+  - Any contradiction (num_contradictory > 0) immediately drops the score to 2 or below.
+  - A high number of REDUNDANT claims reduces the score, but not as severely as a contradiction.
+
+## Claim Evaluation Examples
+Claim Set:
+- “Dr. Chilton is the head of the hospital.”
+- “Chilton seems to be in a position of authority.”
+- “Dr. Chilton is a junior intern at the facility.”
+- “He is in charge of the hospital's operations.”
+
+*Example 1: Consistent*
+- Claim: “1. Dr. Chilton is the head of the hospital.”
+- Label: CONSISTENT
+- Justification: “Initial claim establishing Chilton's role. No contradictions.”
+*Example 2: Redundant*
+- Claim: “2. Chilton seems to be in a position of authority.”
+- Label: REDUNDANT
+- Justification: “This is a weaker restatement of claim #1 ('head of the hospital').”
+*Example 3: Contradictory*
+- Claim: “3. Dr. Chilton is a junior intern at the facility.”
+- Label: CONTRADICTORY
+- Justification: “Directly contradicts claim #1, which states he is the 'head of the hospital'.”
+*Example 4: Redundant*
+- Claim: “4. He is in charge of the hospital's operations.”
+- Label: REDUNDANT
+- Justification: “Repeats the same semantic meaning as claim #1 ('head of the hospital').”
+
+## Coherence Score Examples
+* Example Response A (Score: 5)
+- 4 claims: 4 CONSISTENT, 0 REDUNDANT, 0 CONTRADICTORY
+- Score: 5 - Perfectly coherent and non-repetitive.
+* Example Response B (Score: 4)
+- 4 claims: 3 CONSISTENT, 1 REDUNDANT, 0 CONTRADICTORY
+- Score: 4 - Logically sound, just one minor repetition.
+* Example Response C (Score: 3)
+- 5 claims: 2 CONSISTENT, 3 REDUNDANT, 0 CONTRADICTORY
+- Score: 3 - Logically sound, but very repetitive. No contradictions.
+* Example Response D (Score: 2)
+- 4 claims: 2 CONSISTENT, 0 REDUNDANT, 2 CONTRADICTORY (one pair)
+- Score: 2 - The presence of a single contradiction makes the response logically flawed.
+* Example Response E (Score: 1)
+- 5 claims: 1 CONSISTENT, 2 REDUNDANT, 2 CONTRADICTORY (one pair)
+- Score: 1 - Logically flawed (contradiction) and also repetitive.
+* Example Response F (Score: 0)
+- 4 claims: 0 CONSISTENT, 0 REDUNDANT, 4 CONTRADICTORY (two pairs)
+- Score: 0 - Completely incoherent and self-contradictory.
+
+
+Now, please evaluate all claims in the model response according to these coherence guidelines
