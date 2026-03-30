@@ -11,8 +11,8 @@ Main components:
 - analyze_results: Analyze and summarize evaluation results
 
 Example usage:
-    from eval.data_loader import MovieRecapsDataLoader
-    from eval.model_inference import ModelInference
+    from movierecapsqa.eval.data_loader import MovieRecapsDataLoader
+    from movierecapsqa.eval.model_inference import ModelInference
 
     data_loader = MovieRecapsDataLoader()
     model = ModelInference(provider='openai', model_name='gpt-4-turbo-preview')

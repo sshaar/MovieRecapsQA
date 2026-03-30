@@ -8,7 +8,7 @@ Evaluation framework for MovieRecapsQA dataset supporting:
 ## Installation
 
 ```bash
-cd eval
+cd movierecapsqa/eval
 pip install -r requirements.txt
 cp .env.example .env
 # Edit .env and add your API keys
