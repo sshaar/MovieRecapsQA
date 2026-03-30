@@ -2,7 +2,7 @@
 
 [![Website](https://img.shields.io/badge/Website-View-blue)](website/index.html)
 [![Code](https://img.shields.io/badge/Code-View-green)](code/)
-[![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/sshaar/movierecaps-qa)
+[![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/sshaar/movierecapsqa)
 [![Paper](https://img.shields.io/badge/Paper-arXiv-red)](https://arxiv.org/abs/2601.02536)
 
 
