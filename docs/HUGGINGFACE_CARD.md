@@ -121,6 +121,53 @@ The benchmark provides URLs to external resources that are not included due to c
 - **YouTube Recap Videos**: Use `video_id` to access the original recap videos on YouTube (not the full-length movies)
 - **Temporal Alignment**: Use `movie_start_time`/`movie_end_time` to locate dialogue in movie subtitles, and `recap_start_time`/`recap_end_time` to locate segments in the recap videos
 
+## Usage
+
+### Data Crawling
+
+Scripts are provided to download external resources (subtitles and videos):
+
+```bash
+# Clone the repository
+git clone https://github.com/sshaar/MovieRecapsQA.git
+cd MovieRecapsQA
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Download movie subtitles from OpenSubtitles
+python movierecapsqa/crawl/download_subtitles.py --skip-existing
+
+# Download YouTube recap videos (visual only, no audio)
+python movierecapsqa/crawl/download_yt_videos.py --quality 720 --skip-existing
+```
+
+For more options and detailed documentation, see the [crawl README](https://github.com/sshaar/MovieRecapsQA/blob/main/movierecapsqa/crawl/README.md).
+
+### Evaluation Framework
+
+An evaluation framework is included to assess vision-language models on the benchmark using **Factuality**, **Coherence**, and **Relevance** metrics:
+
+```bash
+cd movierecapsqa/eval
+
+# Configure API keys
+cp .env.example .env
+# Edit .env and add your API keys
+
+# Using OpenAI Batch API (cost-effective, 50% discount)
+./run_batch_pipeline.sh all
+
+# Using real-time APIs (OpenAI, Anthropic, VLLM via LiteLLM)
+./run_eval.sh your-model-output
+```
+
+The framework supports:
+- **Real-time API**: OpenAI, Anthropic, VLLM via LiteLLM
+- **Batch API**: OpenAI Batch API for cost savings
+
+For detailed documentation, see the [eval README](https://github.com/sshaar/MovieRecapsQA/blob/main/movierecapsqa/eval/README.md).
+
 ### Benchmark Statistics
 
 - **Total Recap Videos**: 74
