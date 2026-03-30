@@ -1,9 +1,10 @@
 # MovieRecapsQA: A Multimodal Open-Ended Video Question-Answering Benchmark
 
-[![Website](https://img.shields.io/badge/Website-View-blue)](website/index.html)
-[![Code](https://img.shields.io/badge/Code-View-green)](code/)
+[![Website](https://img.shields.io/badge/Website-View-blue)](https://sshaar.github.io/MovieRecapsQA/)
+[![Code](https://img.shields.io/badge/Code-View-green)](https://github.com/sshaar/MovieRecapsQA)
 [![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/sshaar/movierecapsqa)
 [![Paper](https://img.shields.io/badge/Paper-arXiv-red)](https://arxiv.org/abs/2601.02536)
+
 
 
 ## Dataset
@@ -19,7 +20,37 @@ The MovieRecaps dataset consists of:
 - Movie subtitle files
 - YouTube recap video files or captions
 
+## Usage
 
+### Data Crawling
+
+Download external resources (subtitles and videos) from the dataset:
+
+```bash
+# Download movie subtitles from OpenSubtitles
+python movierecapsqa/crawl/download_subtitles.py --skip-existing
+
+# Download YouTube recap videos (visual only, no audio)
+python movierecapsqa/crawl/download_yt_videos.py --quality 720 --skip-existing
+```
+
+See [`movierecapsqa/crawl/README.md`](movierecapsqa/crawl/README.md) for more options.
+
+### Evaluation
+
+Evaluate vision-language models using our framework with support for OpenAI, Anthropic, and VLLM:
+
+```bash
+cd movierecapsqa/eval
+
+# Using OpenAI Batch API (cost-effective)
+./run_batch_pipeline.sh all
+
+# Using real-time APIs
+./run_eval.sh gpt4-output
+```
+
+The framework evaluates models on **Factuality**, **Coherence**, and **Relevance** metrics. See [`movierecapsqa/eval/README.md`](movierecapsqa/eval/README.md) for details.
 
 ## Benchmark Results
 
